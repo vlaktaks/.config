@@ -4,11 +4,8 @@
 
 [[ $- != *i* ]] && return
 
-source ~/.local/share/blesh/ble.sh
-source ~/.local/share/omarchy/default/bash/rc
-
 if command -v mise >/dev/null 2>&1; then
-    eval "$(mise activate bash)"
+  eval "$(mise activate bash)"
 fi
 
 export GOBIN="$HOME/.local/bin"
@@ -34,23 +31,23 @@ alias gh-update='cd ~/cli && git pull && make && cp bin/gh ~/.local/bin/gh'
 # Extra functions for extract and cd
 #=================================================
 
-function extract () {
-  if [ -f $1 ] ; then
+function extract() {
+  if [ -f $1 ]; then
     case $1 in
-      *.tar.bz2)   tar xjvf $1    ;;
-      *.tar.gz)    tar xzvf $1    ;;
-      *.tar.xz)    tar xvf $1    ;;
-      *.bz2)       bzip2 -d $1    ;;
-      *.rar)       unrar2dir $1    ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1    ;;
-      *.tgz)       tar xzf $1    ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1    ;;
-      *.7z)        7z x $1    ;;
-      *.ace)       unace x $1    ;;
-      *)           echo "'$1' cannot be extracted via extract()"   ;;
+    *.tar.bz2) tar xjvf $1 ;;
+    *.tar.gz) tar xzvf $1 ;;
+    *.tar.xz) tar xvf $1 ;;
+    *.bz2) bzip2 -d $1 ;;
+    *.rar) unrar2dir $1 ;;
+    *.gz) gunzip $1 ;;
+    *.tar) tar xf $1 ;;
+    *.tbz2) tar xjf $1 ;;
+    *.tgz) tar xzf $1 ;;
+    *.zip) unzip $1 ;;
+    *.Z) uncompress $1 ;;
+    *.7z) 7z x $1 ;;
+    *.ace) unace x $1 ;;
+    *) echo "'$1' cannot be extracted via extract()" ;;
     esac
   else
     echo "'$1' is not a valid file"
@@ -58,12 +55,13 @@ function extract () {
 }
 
 function cd() {
-    new_directory="$*";
-    if [ $# -eq 0 ]; then
-        new_directory=${HOME};
-    fi;
-    builtin cd "${new_directory}" && /bin/ls -lhF --time-style=long-iso --color=auto --ignore=lost+found
+  new_directory="$*"
+  if [ $# -eq 0 ]; then
+    new_directory=${HOME}
+  fi
+  builtin cd "${new_directory}" && /bin/ls -lhF --time-style=long-iso --color=auto --ignore=lost+found
 }
 
-
-. "$HOME/.local/share/../bin/env"
+# Ryoku: shell-integratie en syntaxkleuring
+[[ -r /usr/share/ryoku/config/bash/ryoku.bash ]] &&
+  . /usr/share/ryoku/config/bash/ryoku.bash
