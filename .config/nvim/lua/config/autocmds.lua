@@ -1,1 +1,0 @@
--- Empty: neotree autocmd removed
